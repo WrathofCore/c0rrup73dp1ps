@@ -554,7 +554,7 @@ async function findOwnedPips(account) {
    6. Wallet
    ============================================================ */
 
-const state = { account: null, owned: [], selected: new Set(), busy: false, ctaAction: null };
+const state = { account: null, owned: [], selected: new Set(), busy: false, scanning: false, ctaAction: null };
 const eth = () => window.ethereum;
 const hexChain = n => "0x" + n.toString(16);
 
@@ -642,6 +642,12 @@ async function afterConnect() {
 }
 
 async function loadPips() {
+  if (state.scanning) { log("scan already running, ignoring duplicate start"); return; }
+  state.scanning = true;
+  try { await runScan(); } finally { state.scanning = false; }
+}
+
+async function runScan() {
   el.panelTitle.textContent = "Y0UR GR1D P1PS";
   el.pips.innerHTML = "";
   el.pips.classList.add("hidden");
@@ -679,7 +685,9 @@ async function loadPips() {
   renderPips();
   el.selRow.classList.remove("hidden");
   el.pips.classList.remove("hidden");
-  selectAll(true);
+  // Nothing is preselected on purpose. Salvage is irreversible, so the user
+  // picks deliberately. "S3L3C7 ALL" is one click for anyone who wants it.
+  selectAll(false);
 }
 
 function renderPips() {
@@ -871,7 +879,13 @@ if (eth()) {
       el.panelTitle.textContent = "C0NN3C7";
       say("Wall37 d1sc0nn3c73d.");
       setCta("C0NN3C7 WALL37", connect, false);
-    } else { state.account = accs[0].toLowerCase(); afterConnect(); }
+    } else {
+      const next = accs[0].toLowerCase();
+      // MetaMask fires this on connect too. Same account means nothing changed.
+      if (next === state.account) { log("same account, no rescan"); return; }
+      state.account = next;
+      afterConnect();
+    }
   });
   eth().on && eth().on("chainChanged", () => { log("wallet chainChanged"); afterConnect(); });
 }
