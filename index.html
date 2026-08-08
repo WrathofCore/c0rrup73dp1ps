@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>C0RRUP73D.P1PS</title>
+<meta name="description" content="825 burn-to-claim derivatives of grid pips. Consume a grid pip to recover the corrupted version of the same id.">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="C0RRUP73D.P1PS">
+<meta property="og:description" content="7h3 1mag3 da7a was always 0n cha1n. N07h1ng c0uld r3ad 17.">
+<meta property="og:image" content="https://img.syst3mc0r3.art/10.png">
+<meta property="og:url" content="https://c0rrup73dp1ps.online">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root{
+  --bg:#05030a;
+  --ink:#3df2a0;
+  --dim:#6b9683;
+  --mag:#ff2d95;
+  --mag-soft:#ff5fb8;
+  --err:#ff4444;
+  --ok:#c8ffe4;
+  --line:rgba(255,45,149,.22);
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--ink);
+  font:14px/1.6 var(--mono);
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;overflow-x:hidden;
+}
+/* ---------- background: horizon + receding grid ---------- */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg .sky{
+  position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);
+  width:180vmax;height:80vmax;
+  background:radial-gradient(ellipse at center,rgba(255,45,149,.20) 0%,rgba(255,45,149,.06) 32%,transparent 62%);
+}
+.bg .horizon{
+  position:absolute;left:0;right:0;top:38%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--mag-soft) 20%,var(--mag-soft) 80%,transparent);
+  box-shadow:0 0 24px 2px rgba(255,45,149,.55);
+  opacity:.75;
+}
+.bg .floor{
+  position:absolute;left:-50%;width:200%;top:38%;height:62%;
+  transform:perspective(340px) rotateX(66deg);transform-origin:50% 0;
+  background-image:
+    repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 84px),
+    repeating-linear-gradient(0deg,var(--line) 0 1px,transparent 1px 84px);
+  animation:drift 7s linear infinite;
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.95),transparent 78%);
+  mask-image:linear-gradient(180deg,rgba(0,0,0,.95),transparent 78%);
+}
+@keyframes drift{to{background-position:0 84px,0 84px}}
+@media (prefers-reduced-motion:reduce){.bg .floor{animation:none}}
+
+/* ---------- layout ---------- */
+.wrap{position:relative;z-index:1;max-width:660px;margin:0 auto;padding:44px 18px 96px}
+header{margin-bottom:30px}
+h1{
+  margin:0;font-size:clamp(22px,6.4vw,34px);font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  text-shadow:0 0 18px rgba(255,45,149,.5);
+}
+.sub{margin:6px 0 0;color:var(--dim);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+
+/* hero: deliberately small. the source art is low resolution, so do not upscale it. */
+.hero{
+  margin:0 auto 26px;position:relative;
+  width:100%;max-width:264px;
+  border:1px solid var(--line);background:#0a0512;
+}
+.hero img{
+  display:block;width:100%;height:auto;
+  image-rendering:pixelated;image-rendering:crisp-edges;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 1px,transparent 1px 3px);
+  mix-blend-mode:multiply;
+}
+.hero figcaption{
+  position:absolute;left:0;bottom:0;padding:4px 8px;
+  background:rgba(5,3,10,.82);color:var(--mag-soft);
+  font-size:10px;letter-spacing:.1em;
+}
+.imgfail{
+  display:none;padding:18px;color:var(--err);font-size:11px;
+  border:1px dashed var(--err);
+}
+
+.premise{font-size:15px;line-height:1.8;margin:0 0 30px;max-width:46ch}
+.premise em{color:var(--mag-soft);font-style:normal}
+
+section{border-top:1px solid var(--line);padding-top:20px;margin-top:28px}
+h2{margin:0 0 12px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600}
+
+ol.steps{margin:0;padding-left:0;list-style:none;counter-reset:s}
+ol.steps li{
+  counter-increment:s;position:relative;padding-left:30px;margin-bottom:12px;
+  font-size:13px;color:var(--ink)
+}
+ol.steps li::before{
+  content:counter(s);position:absolute;left:0;top:0;
+  width:19px;height:19px;line-height:19px;text-align:center;
+  border:1px solid var(--mag);color:var(--mag);font-size:11px
+}
+ol.steps small{display:block;color:var(--dim);font-size:12px;margin-top:2px}
+code{color:var(--mag-soft);word-break:break-all;font-size:12px}
+
+button{
+  font:inherit;font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+  background:transparent;color:var(--mag);border:1px solid var(--mag);
+  padding:13px 20px;cursor:pointer;width:100%;
+  transition:background .15s,color .15s;
+}
+button:hover:not(:disabled){background:var(--mag);color:#0a0512}
+button:disabled{opacity:.4;cursor:not-allowed}
+button:focus-visible{outline:2px solid var(--mag-soft);outline-offset:2px}
+button.ghost{border-color:var(--line);color:var(--dim);padding:9px 12px;width:auto;font-size:11px}
+button.ghost:hover:not(:disabled){background:transparent;color:var(--ink);border-color:var(--mag)}
+.row{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+
+/* ---------- token grid ---------- */
+.pips{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:10px;margin:14px 0 20px}
+.pip{border:1px solid var(--line);background:#0a0512;padding:0;cursor:pointer;position:relative;display:block;width:100%}
+.pip img{display:block;width:100%;height:auto;image-rendering:pixelated;image-rendering:crisp-edges;opacity:.55;transition:opacity .15s}
+.pip .id{
+  display:block;padding:5px 7px;font-size:11px;letter-spacing:.08em;
+  color:var(--dim);text-align:left;border-top:1px solid var(--line)
+}
+.pip[aria-pressed="true"]{border-color:var(--mag);box-shadow:0 0 0 1px var(--mag),0 0 22px rgba(255,45,149,.3)}
+.pip[aria-pressed="true"] img{opacity:1}
+.pip[aria-pressed="true"] .id{color:var(--mag)}
+.pip:focus-visible{outline:2px solid var(--mag-soft);outline-offset:2px}
+
+/* ---------- status + log ---------- */
+.status{font-size:13px;margin:0 0 14px;min-height:1.6em}
+.status.err{color:var(--err)}
+.status.ok{color:var(--ok)}
+.bar{height:2px;background:rgba(255,45,149,.15);margin:10px 0 16px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--mag);transition:width .18s linear}
+.log{
+  border:1px solid var(--line);background:rgba(0,0,0,.35);padding:10px;
+  font-size:11px;line-height:1.55;color:var(--dim);
+  max-height:190px;overflow-y:auto;white-space:pre-wrap;word-break:break-word
+}
+.log b{color:var(--err);font-weight:400}
+.log u{color:var(--ok);text-decoration:none}
+a{color:var(--mag-soft)}
+a:focus-visible{outline:2px solid var(--mag-soft);outline-offset:2px}
+footer{margin-top:40px;border-top:1px solid var(--line);padding-top:16px;color:var(--dim);font-size:11px;line-height:1.9}
+footer .k{color:#4a7060;display:inline-block;min-width:92px}
+.hidden{display:none !important}
+@media (max-width:420px){
+  .wrap{padding:30px 14px 70px}
+  .hero{max-width:212px}
+  .pips{grid-template-columns:repeat(auto-fill,minmax(82px,1fr))}
+}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <div class="sky"></div>
+  <div class="floor"></div>
+  <div class="horizon"></div>
+</div>
+
+<main class="wrap">
+  <header>
+    <h1>C0RRUP73D.P1PS</h1>
+    <p class="sub" id="netline">825 r3c0v3r3d ar71fac7s</p>
+  </header>
+
+  <figure class="hero">
+    <img id="hero" src="https://img.syst3mc0r3.art/10.png" alt="Corrupted grid pip, token 10" width="512" height="512">
+    <div class="imgfail" id="heroFail">H3R0 1MAG3 FA1L3D. Could not load img.syst3mc0r3.art/10.png. The site works; the picture does not.</div>
+    <figcaption>#10 &middot; R3C0V3R3D</figcaption>
+  </figure>
+
+  <p class="premise">
+    7h3 1mag3 da7a was always 0n cha1n. N07h1ng c0uld r3ad 17.
+    <em>C0nsum3 a gr1d p1p 70 s33 wha7 was und3rn3a7h.</em>
+    I7 d03s n07 c0m3 back cl3an.
+  </p>
+
+  <section>
+    <h2>7W0 7RANSAC710NS</h2>
+    <ol class="steps">
+      <li>Appr0v3 C0RE 0n 7h3 gr1d p1ps c0n7rac7.
+        <small><code>setApprovalForAll</code> 0n GR1D P1PS. 0nc3 p3r wall37, n07 0nc3 p3r 70k3n.</small></li>
+      <li>Salvag3.
+        <small>Y0ur p1p g03s 70 <code>0x…dEaD</code>. 7h3 c0rrup73d 70k3n 0f 7h3 sam3 1d 1s m1n73d 70 y0u. 1:1, fr33, n0 all0wl1s7.</small></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2 id="panelTitle">C0NN3C7</h2>
+    <p class="status" id="status" role="status" aria-live="polite">N07 C0NN3C73D.</p>
+    <div class="bar hidden" id="bar"><i id="barFill"></i></div>
+
+    <div class="row hidden" id="selRow">
+      <button class="ghost" id="selAll" type="button">S3L3C7 ALL</button>
+      <button class="ghost" id="selNone" type="button">CL3AR</button>
+    </div>
+    <div class="pips hidden" id="pips"></div>
+
+    <button id="cta" type="button">C0NN3C7 WALL37</button>
+  </section>
+
+  <section>
+    <h2>L0G</h2>
+    <div class="log" id="log" aria-live="polite">awa171ng 1npu7</div>
+  </section>
+
+  <footer>
+    <div><span class="k">n37w0rk</span><span id="fNet">&mdash;</span></div>
+    <div><span class="k">gr1d p1ps</span><a id="fPips" href="#" target="_blank" rel="noopener">&mdash;</a></div>
+    <div><span class="k">c0r3</span><a id="fCore" href="#" target="_blank" rel="noopener">&mdash;</a></div>
+    <div style="margin-top:10px">c0rrup73dp1ps.online</div>
+  </footer>
+</main>
+
+<script>
+(() => {
+"use strict";
+
+/* ============================================================
+   1. CONFIG - single switch
+   ============================================================ */
+
+const NETWORK = "testnet";        // "testnet" | "mainnet"
+
+const CONFIG = {
+  testnet: {
+    label:      "Robinhood Chain testnet",
+    chainId:    46630,
+    rpc:        "https://rpc.testnet.chain.robinhood.com/rpc",
+    gridPips:   "0x51b4d09433B089c5BEe36a1D6eE7339c8F8A2572",
+    core:       "0xCe51f8c8d3cc1191c50D4Fb779B74f8b86Ff3a2C",
+    explorer:   "https://explorer.testnet.chain.robinhood.com",
+    // Shown to a wallet holding no pips. Testnet has no marketplace, so this points at the gallery.
+    pipsLink:   "https://gridpips.xyz",
+    pipsLinkLabel: "gr1dp1ps.xyz"
+  },
+  mainnet: {
+    label:      "Robinhood Chain",
+    chainId:    4663,
+    // Verified: returns chainId 0x1237. The bare host works too; /rpc kept for symmetry with testnet.
+    rpc:        "https://rpc.mainnet.chain.robinhood.com/rpc",
+    gridPips:   "0xa8F4DAec5aC1916C9ea3F7733bb06459cC1C0367",
+    // >>> FILL IN: C0RE is NOT DEPLOYED on mainnet yet. <<<
+    core:       "0xC0RE_NOT_DEPLOYED_YET",
+    explorer:   "https://robinhoodchain.blockscout.com",
+    // Shown to a wallet holding no pips.
+    pipsLink:   "https://opensea.io/collection/grid-pips",
+    pipsLinkLabel: "0p3nS3a"
+  }
+};
+
+const MAX_ID   = 825;
+const DEAD     = "0x000000000000000000000000000000000000dEaD";
+const HERO_ID  = 10;
+const IMG      = id => `https://img.syst3mc0r3.art/${id}.png`;
+
+// Canonical CREATE2 deployment. Confirmed live on Robinhood testnet. Still probed at runtime, never assumed.
+const MULTICALL3 = "0xcA11bde05977b3631167028862bE2a173976CA11";
+
+// Native gas token for wallet_addEthereumChain. Confirmed ETH by Corey.
+const NATIVE = { name: "Ether", symbol: "ETH", decimals: 18 };
+
+const CHUNK_MULTICALL = 150;   // ids per aggregate3 call
+const CHUNK_BATCH     = 80;    // ids per JSON-RPC batch POST
+
+const CFG = CONFIG[NETWORK];
+
+/* ============================================================
+   2. ABI - selectors derived from keccak256 of the signature
+   ============================================================ */
+
+const SEL = {
+  ownerOf:            "6352211e",  // ownerOf(uint256)
+  setApprovalForAll:  "a22cb465",  // setApprovalForAll(address,bool)
+  isApprovedForAll:   "e985e9c5",  // isApprovedForAll(address,address)
+  salvage:            "695a0296",  // salvage(uint256)
+  salvageMany:        "bf7d7ada",  // salvageMany(uint256[])
+  totalSupply:        "18160ddd",  // totalSupply()
+  aggregate3:         "82ad56cb"   // aggregate3((address,bool,bytes)[])  - Multicall3
+};
+
+const strip = h => (h || "").replace(/^0x/, "");
+const pad32 = h => strip(h).padStart(64, "0");
+const padR32 = h => { h = strip(h); const r = h.length % 64; return r ? h + "0".repeat(64 - r) : h; };
+const hexNum = n => BigInt(n).toString(16);
+const wordAt = (h, byteOff) => h.slice(byteOff * 2, byteOff * 2 + 64);
+const numAt  = (h, byteOff) => Number(BigInt("0x" + wordAt(h, byteOff)));
+const addrFromWord = w => "0x" + w.slice(24);
+
+const encOwnerOf     = id => "0x" + SEL.ownerOf + pad32(hexNum(id));
+const encIsApproved  = (owner, op) => "0x" + SEL.isApprovedForAll + pad32(owner) + pad32(op);
+const encSetApproval = (op, v) => "0x" + SEL.setApprovalForAll + pad32(op) + pad32(v ? "1" : "0");
+// salvage(uint256) is intentionally unused. The UI always calls salvageMany so
+// there is a single code path. Kept here because the contract exposes it.
+const encSalvage     = id => "0x" + SEL.salvage + pad32(hexNum(id));
+const encSalvageMany = ids => "0x" + SEL.salvageMany + pad32("20") + pad32(hexNum(ids.length))
+                              + ids.map(i => pad32(hexNum(i))).join("");
+
+function encAggregate3(calls) {
+  const tuples = calls.map(c => {
+    const d = strip(c.data);
+    return pad32(c.target) + pad32(c.allowFailure ? "1" : "0") + pad32("60")
+         + pad32(hexNum(d.length / 2)) + padR32(d);
+  });
+  let off = calls.length * 32, heads = "";
+  for (const t of tuples) { heads += pad32(hexNum(off)); off += t.length / 2; }
+  return "0x" + SEL.aggregate3 + pad32("20") + pad32(hexNum(calls.length)) + heads + tuples.join("");
+}
+
+function decAggregate3(ret) {
+  const h = strip(ret);
+  const arrOff = numAt(h, 0);
+  const n = numAt(h, arrOff);
+  const base = arrOff + 32;
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const t = base + numAt(h, base + i * 32);
+    const success = BigInt("0x" + wordAt(h, t)) === 1n;
+    const b = t + numAt(h, t + 32);
+    const len = numAt(h, b);
+    out.push({ success, data: "0x" + h.slice((b + 32) * 2, (b + 32) * 2 + len * 2) });
+  }
+  return out;
+}
+
+// Custom error selectors, keccak256 of the signature. solady ERC721 plus C0RE.
+// TokenDoesNotExist is the one an unminted id returns; confirmed live on testnet.
+const KNOWN_ERRORS = {
+  "ceea21b6": "TokenDoesNotExist()",
+  "4b6e7f18": "NotOwnerNorApproved()",
+  "c991cbb1": "TokenAlreadyExists()",
+  "a1148100": "TransferFromIncorrectOwner()",
+  "ea553b34": "TransferToZeroAddress()",
+  "d1a57ed6": "TransferToNonERC721ReceiverImplementer()",
+  "8f4eb604": "BalanceQueryForZeroAddress()",
+  "01336cea": "AccountBalanceOverflow()",
+  "82b42900": "Unauthorized()"
+  // Add C0RE's own errors here once the contract is final. An unnamed selector
+  // still shows as hex rather than being swallowed.
+};
+
+// Error(string) - turn revert data into something a human can read.
+function decodeRevert(data) {
+  const h = strip(data || "");
+  if (!h) return "reverted with no reason data";
+  if (h.slice(0, 8) === "08c379a0") {
+    try {
+      const body = h.slice(8);
+      const off = Number(BigInt("0x" + body.slice(0, 64)));
+      const len = Number(BigInt("0x" + body.slice(off * 2, off * 2 + 64)));
+      const bytes = body.slice(off * 2 + 64, off * 2 + 64 + len * 2);
+      return decodeURIComponent(bytes.replace(/../g, "%$&"));
+    } catch (e) { return "reverted (unparseable Error string)"; }
+  }
+  if (h.slice(0, 8) === "4e487b71") return "panic 0x" + h.slice(-2);
+  const known = KNOWN_ERRORS[h.slice(0, 8).toLowerCase()];
+  return known ? `reverted: ${known}` : "reverted, unknown custom error 0x" + h.slice(0, 8);
+}
+
+/* ============================================================
+   3. DOM + logging. Nothing fails quietly.
+   Chrome and short status lines are leet. Errors, addresses,
+   hashes and log detail stay plain so a failure is readable.
+   ============================================================ */
+
+const $ = id => document.getElementById(id);
+const el = {
+  status: $("status"), cta: $("cta"), pips: $("pips"), log: $("log"),
+  bar: $("bar"), barFill: $("barFill"), selRow: $("selRow"),
+  panelTitle: $("panelTitle"), netline: $("netline")
+};
+
+function log(msg, kind) {
+  const t = new Date().toISOString().slice(11, 19);
+  const line = document.createElement("div");
+  const tag = kind === "err" ? "b" : kind === "ok" ? "u" : "span";
+  line.innerHTML = `${t}  <${tag}></${tag}>`;
+  line.querySelector(tag).textContent = msg;
+  if (el.log.textContent === "awa171ng 1npu7") el.log.textContent = "";
+  el.log.appendChild(line);
+  el.log.scrollTop = el.log.scrollHeight;
+  (kind === "err" ? console.error : console.log)("[c0re]", msg);
+}
+function say(msg, kind) {
+  el.status.textContent = msg;
+  el.status.className = "status" + (kind ? " " + kind : "");
+}
+function fail(where, e) {
+  const msg = (e && (e.data && e.data.message || e.message)) || String(e);
+  const code = e && e.code !== undefined ? ` [code ${e.code}]` : "";
+  say(`${where}: ${msg}${code}`, "err");
+  log(`${where}: ${msg}${code}`, "err");
+}
+function progress(done, total) {
+  el.bar.classList.remove("hidden");
+  el.barFill.style.width = Math.round((done / total) * 100) + "%";
+}
+function progressOff() { el.bar.classList.add("hidden"); el.barFill.style.width = "0"; }
+
+$("hero").addEventListener("error", () => {
+  $("hero").style.display = "none";
+  $("heroFail").style.display = "block";
+  log("hero image " + IMG(HERO_ID) + " failed to load", "err");
+});
+
+// Footer
+el.netline.textContent = `825 r3c0v3r3d ar71fac7s · ${CFG.label}`;
+$("fNet").textContent = `${CFG.label} · chain ${CFG.chainId}`;
+$("fPips").textContent = CFG.gridPips;
+$("fPips").href = `${CFG.explorer}/address/${CFG.gridPips}`;
+$("fCore").textContent = CFG.core;
+$("fCore").href = `${CFG.explorer}/address/${CFG.core}`;
+
+/* ============================================================
+   4. RPC
+   ============================================================ */
+
+let rpcId = 1;
+
+async function rpc(method, params) {
+  const r = await rpcBatch([{ method, params }]);
+  const res = r[0];
+  if (res.error) {
+    const err = new Error(`${method}: ${res.error.message || JSON.stringify(res.error)}`);
+    err.code = res.error.code;
+    err.revertData = res.error.data;   // kept so a revert reason can be decoded
+    throw err;
+  }
+  return res.result;
+}
+
+// One POST, array of requests. Returns responses in the order they were sent.
+async function rpcBatch(calls) {
+  const payload = calls.map(c => ({ jsonrpc: "2.0", id: rpcId++, method: c.method, params: c.params || [] }));
+  let resp;
+  try {
+    resp = await fetch(CFG.rpc, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+  } catch (e) {
+    throw new Error(`RPC unreachable at ${CFG.rpc} (${e.message})`);
+  }
+  if (!resp.ok) throw new Error(`RPC HTTP ${resp.status} ${resp.statusText}`);
+  let body;
+  try { body = await resp.json(); }
+  catch (e) { throw new Error("RPC returned non-JSON. Check the RPC URL."); }
+  if (!Array.isArray(body)) {
+    if (body && body.error) throw new Error(`RPC error: ${body.error.message}`);
+    throw new Error("RPC did not honour a batched request (expected an array).");
+  }
+  const byId = new Map(body.map(r => [r.id, r]));
+  return payload.map(p => byId.get(p.id) || { error: { message: "no response for request id " + p.id } });
+}
+
+const ethCall = (to, data) => rpc("eth_call", [{ to, data }, "latest"]);
+
+/* ============================================================
+   5. Ownership scan - Multicall3 if present, batched eth_call if not
+   ============================================================ */
+
+let multicallReady = null;   // null = unprobed, true/false = probed
+
+async function probeMulticall() {
+  if (multicallReady !== null) return multicallReady;
+  try {
+    const code = await rpc("eth_getCode", [MULTICALL3, "latest"]);
+    multicallReady = !!code && code !== "0x" && code.length > 4;
+    log(multicallReady
+      ? `Multicall3 found at ${MULTICALL3} (${(code.length - 2) / 2} bytes). Using aggregate3.`
+      : `No Multicall3 at ${MULTICALL3}. Using batched eth_call.`);
+  } catch (e) {
+    multicallReady = false;
+    log("Multicall3 probe failed (" + e.message + "). Falling back to batched eth_call.", "err");
+  }
+  return multicallReady;
+}
+
+const chunk = (arr, n) => { const o = []; for (let i = 0; i < arr.length; i += n) o.push(arr.slice(i, i + n)); return o; };
+
+async function scanViaMulticall(ids, account, onProgress) {
+  const owned = [];
+  let done = 0;
+  for (const group of chunk(ids, CHUNK_MULTICALL)) {
+    const data = encAggregate3(group.map(id => ({
+      target: CFG.gridPips, allowFailure: true, data: encOwnerOf(id)
+    })));
+    const ret = await ethCall(MULTICALL3, data);
+    const results = decAggregate3(ret);
+    if (results.length !== group.length) throw new Error(`aggregate3 returned ${results.length} results for ${group.length} calls`);
+    results.forEach((r, i) => {
+      if (!r.success || r.data.length < 66) return;    // never minted, or already burnt
+      if (addrFromWord(strip(r.data)).toLowerCase() === account) owned.push(group[i]);
+    });
+    done += group.length;
+    onProgress(done);
+  }
+  return owned;
+}
+
+async function scanViaBatch(ids, account, onProgress) {
+  const owned = [];
+  let done = 0;
+  for (const group of chunk(ids, CHUNK_BATCH)) {
+    const res = await rpcBatch(group.map(id => ({
+      method: "eth_call",
+      params: [{ to: CFG.gridPips, data: encOwnerOf(id) }, "latest"]
+    })));
+    res.forEach((r, i) => {
+      if (r.error) return;                              // unminted ids revert; expected
+      if (!r.result || r.result.length < 66) return;
+      if (addrFromWord(strip(r.result)).toLowerCase() === account) owned.push(group[i]);
+    });
+    done += group.length;
+    onProgress(done);
+  }
+  return owned;
+}
+
+async function findOwnedPips(account) {
+  const ids = Array.from({ length: MAX_ID }, (_, i) => i + 1);
+  const onProgress = d => {
+    progress(d, MAX_ID);
+    say(`SCANN1NG… ${d} / ${MAX_ID} 1ds ch3ck3d.`);
+  };
+  const useMc = await probeMulticall();
+  if (useMc) {
+    try {
+      return await scanViaMulticall(ids, account, onProgress);
+    } catch (e) {
+      log("Multicall3 path failed: " + e.message + " - retrying with batched eth_call.", "err");
+      say("Multicall3 failed. R37ry1ng w17h ba7ch3d calls…");
+      multicallReady = false;
+    }
+  }
+  return await scanViaBatch(ids, account, onProgress);
+}
+
+/* ============================================================
+   6. Wallet
+   ============================================================ */
+
+const state = { account: null, owned: [], selected: new Set(), busy: false, ctaAction: null };
+const eth = () => window.ethereum;
+const hexChain = n => "0x" + n.toString(16);
+
+function setCta(label, action, disabled) {
+  el.cta.textContent = label;
+  el.cta.disabled = !!disabled;
+  state.ctaAction = action;
+  el.cta.classList.toggle("hidden", !action && !disabled);
+}
+
+async function connect() {
+  if (!eth()) {
+    say("N0 WALL37 F0UND. Open this page in a wallet browser, or install a browser wallet, then reload.", "err");
+    log("window.ethereum is undefined", "err");
+    return;
+  }
+  say("Wa171ng f0r wall37…");
+  const accounts = await eth().request({ method: "eth_requestAccounts" });
+  if (!accounts || !accounts.length) throw new Error("wallet returned no accounts");
+  state.account = accounts[0].toLowerCase();
+  log("Connected " + state.account, "ok");
+  await afterConnect();
+}
+
+async function currentChainId() {
+  const id = await eth().request({ method: "eth_chainId" });
+  return parseInt(id, 16);
+}
+
+async function switchNetwork() {
+  try {
+    await eth().request({ method: "wallet_switchEthereumChain", params: [{ chainId: hexChain(CFG.chainId) }] });
+    log("Switched to chain " + CFG.chainId, "ok");
+  } catch (e) {
+    if (e && (e.code === 4902 || (e.data && e.data.originalError && e.data.originalError.code === 4902))) {
+      log("Chain unknown to wallet. Requesting add.");
+      await eth().request({
+        method: "wallet_addEthereumChain",
+        params: [{
+          chainId: hexChain(CFG.chainId),
+          chainName: CFG.label,
+          rpcUrls: [CFG.rpc],
+          nativeCurrency: NATIVE,
+          blockExplorerUrls: [CFG.explorer]
+        }]
+      });
+      log("Chain added.", "ok");
+    } else { throw e; }
+  }
+  await afterConnect();
+}
+
+/* ============================================================
+   7. Flow
+   ============================================================ */
+
+function configGuard() {
+  if (CFG.rpc.indexOf("PASTE_") === 0) {
+    say(`N0 RPC URL s37 f0r ${CFG.label}. Fill in CONFIG.${NETWORK}.rpc at the top of this file.`, "err");
+    setCta("N07 C0NF1GUR3D", null, true);
+    return false;
+  }
+  if (!/^0x[0-9a-fA-F]{40}$/.test(CFG.core)) {
+    say(`C0RE 1s n07 d3pl0y3d 0n ${CFG.label} y37. Fill in CONFIG.${NETWORK}.core at the top of this file.`, "err");
+    setCta("N07 D3PL0Y3D", null, true);
+    return false;
+  }
+  return true;
+}
+
+async function afterConnect() {
+  if (!configGuard()) return;
+  try {
+    const chain = await currentChainId();
+    if (chain !== CFG.chainId) {
+      el.panelTitle.textContent = "WR0NG N37W0RK";
+      say(`Wall37 1s 0n cha1n ${chain}. 7h1s pag3 n33ds ${CFG.label} (chain ${CFG.chainId}).`, "err");
+      el.pips.classList.add("hidden");
+      el.selRow.classList.add("hidden");
+      setCta("SW17CH N37W0RK", switchNetwork, false);
+      return;
+    }
+    await loadPips();
+  } catch (e) { fail("Network check failed", e); setCta("R37RY", afterConnect, false); }
+}
+
+async function loadPips() {
+  el.panelTitle.textContent = "Y0UR GR1D P1PS";
+  el.pips.innerHTML = "";
+  el.pips.classList.add("hidden");
+  el.selRow.classList.add("hidden");
+  state.selected.clear();
+  setCta("SCANN1NG…", null, true);
+  say("N317h3r c0n7rac7 1s 3num3rabl3. R3ad1ng ownerOf 1-825 d1r3c7ly.");
+  log(`Scan start · owner ${state.account} · grid pips ${CFG.gridPips}`);
+
+  let owned;
+  try {
+    owned = await findOwnedPips(state.account);
+  } catch (e) {
+    progressOff();
+    fail("Scan failed", e);
+    setCta("R37RY SCAN", loadPips, false);
+    return;
+  }
+  progressOff();
+  state.owned = owned.sort((a, b) => a - b);
+  log(`Scan complete · ${owned.length} pip(s) held`, "ok");
+
+  if (!owned.length) {
+    say("7h1s wall37 h0lds n0 gr1d p1ps. Salvag3 n33ds 0n3.");
+    el.panelTitle.textContent = "N07H1NG 70 SALVAG3";
+    el.pips.classList.remove("hidden");
+    el.pips.innerHTML = `<p style="grid-column:1/-1;margin:0;color:var(--dim);font-size:13px">
+      Gr1d p1ps a7 <a href="${CFG.pipsLink}" target="_blank" rel="noopener">${CFG.pipsLinkLabel}</a>.
+      7h3 7humbna1ls 7h3r3 ar3 blank. 7ha7 1s 7h3 p01n7 0f 7h1s c0ll3c710n.</p>`;
+    setCta("R3SCAN", loadPips, false);
+    return;
+  }
+
+  say(`${owned.length} gr1d p1p${owned.length === 1 ? "" : "s"} h3ld. S3l3c7 wha7 70 c0nsum3.`);
+  renderPips();
+  el.selRow.classList.remove("hidden");
+  el.pips.classList.remove("hidden");
+  selectAll(true);
+}
+
+function renderPips() {
+  el.pips.innerHTML = "";
+  for (const id of state.owned) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "pip";
+    b.setAttribute("aria-pressed", "false");
+    b.setAttribute("aria-label", "grid pip " + id);
+    const img = document.createElement("img");
+    img.src = IMG(id); img.alt = "corrupted preview of pip " + id;
+    img.loading = "lazy"; img.width = 256; img.height = 256;
+    img.addEventListener("error", () => {
+      const d = document.createElement("div");
+      d.className = "imgfail";
+      d.style.cssText = "display:block;padding:10px;font-size:10px";
+      d.textContent = "1MG " + id + " M1SS1NG";
+      img.replaceWith(d);
+      log("preview image missing: " + IMG(id), "err");
+    });
+    const s = document.createElement("span");
+    s.className = "id"; s.textContent = "#" + id;
+    b.append(img, s);
+    b.addEventListener("click", () => toggle(id, b));
+    el.pips.appendChild(b);
+  }
+}
+
+function toggle(id, btn) {
+  if (state.busy) return;
+  if (state.selected.has(id)) state.selected.delete(id); else state.selected.add(id);
+  btn.setAttribute("aria-pressed", state.selected.has(id) ? "true" : "false");
+  updateCta();
+}
+function selectAll(on) {
+  if (state.busy) return;
+  state.selected.clear();
+  if (on) state.owned.forEach(id => state.selected.add(id));
+  el.pips.querySelectorAll(".pip").forEach(b => b.setAttribute("aria-pressed", on ? "true" : "false"));
+  updateCta();
+}
+function updateCta() {
+  const n = state.selected.size;
+  setCta(n ? `SALVAG3 ${n} P1P${n === 1 ? "" : "S"}` : "S3L3C7 A P1P", n ? salvageFlow : null, !n);
+}
+$("selAll").addEventListener("click", () => selectAll(true));
+$("selNone").addEventListener("click", () => selectAll(false));
+
+/* ============================================================
+   8. Approve + salvage
+   ============================================================ */
+
+async function isApproved() {
+  const r = await ethCall(CFG.gridPips, encIsApproved(state.account, CFG.core));
+  return BigInt(r) === 1n;
+}
+
+async function sendTx(to, data, label) {
+  log(`${label} -> ${to}`);
+  const hash = await eth().request({
+    method: "eth_sendTransaction",
+    params: [{ from: state.account, to, data }]
+  });
+  log(`${label} tx ${hash}`);
+  say(`${label} subm1773d. Wa171ng f0r 7h3 cha1n…`);
+  const rcpt = await waitForReceipt(hash);
+  if (!rcpt) throw new Error(`${label} tx ${hash} not mined within 3 minutes. It may still land: check the explorer.`);
+  if (BigInt(rcpt.status || "0x0") !== 1n) throw new Error(`${label} reverted on chain. tx ${hash}`);
+  log(`${label} confirmed in block ${parseInt(rcpt.blockNumber, 16)}`, "ok");
+  return hash;
+}
+
+async function waitForReceipt(hash) {
+  const deadline = Date.now() + 180000;
+  let n = 0;
+  while (Date.now() < deadline) {
+    await new Promise(r => setTimeout(r, 2000));
+    n++;
+    try {
+      const r = await rpc("eth_getTransactionReceipt", [hash]);
+      if (r) return r;
+    } catch (e) {
+      log(`receipt poll ${n} failed: ${e.message}`, "err");
+    }
+    if (n % 10 === 0) say(`S71LL wa171ng 0n 7h3 cha1n (${n * 2}s). tx ${hash.slice(0, 10)}…`);
+  }
+  return null;
+}
+
+function explorerTx(hash) { return `${CFG.explorer}/tx/${hash}`; }
+
+async function salvageFlow() {
+  const ids = [...state.selected].sort((a, b) => a - b);
+  if (!ids.length) return;
+  state.busy = true;
+  setCta("W0RK1NG…", null, true);
+  try {
+    // 1. approval
+    say("Ch3ck1ng appr0val…");
+    let approved;
+    try { approved = await isApproved(); }
+    catch (e) { throw new Error("isApprovedForAll read failed: " + e.message); }
+    log("isApprovedForAll = " + approved);
+
+    if (!approved) {
+      say("7X 1 0F 2: appr0v3 C0RE 0n 7h3 gr1d p1ps c0n7rac7.");
+      await sendTx(CFG.gridPips, encSetApproval(CFG.core, true), "Approval");
+      if (!(await isApproved())) throw new Error("Approval mined but isApprovedForAll is still false. Stopping before salvage.");
+    } else {
+      log("Approval already set. Skipping transaction 1.");
+    }
+
+    // 2. preflight, so a revert has a reason attached before the wallet asks for a signature
+    // Always salvageMany, even for one id. A one-element array is proven on chain
+    // (testnet C0RRUP73D #75 was minted by 0xbf7d7ada). One path, no untested branch.
+    const data = encSalvageMany(ids);
+    say("S1mula71ng salvag3…");
+    try {
+      await rpc("eth_call", [{ from: state.account, to: CFG.core, data }, "latest"]);
+      log("Preflight ok for id(s) " + ids.join(", "));
+    } catch (e) {
+      const m = String(e.message || "");
+      const raw = typeof e.revertData === "string" ? e.revertData
+                : (e.revertData && e.revertData.data)
+                || (m.match(/0x[0-9a-fA-F]{8,}/) || [])[0];
+      throw new Error("Salvage would revert: " + (raw ? decodeRevert(raw) : m));
+    }
+
+    // 3. salvage
+    say(`7X ${approved ? "1 0F 1" : "2 0F 2"}: salvag1ng ${ids.length} p1p${ids.length === 1 ? "" : "s"}.`);
+    const hash = await sendTx(CFG.core, data, "Salvage");
+    done(hash, ids);
+  } catch (e) {
+    state.busy = false;
+    if (e && (e.code === 4001 || /user rejected|denied/i.test(e.message || ""))) {
+      say("Y0u r3j3c73d 7h3 7ransac710n 1n y0ur wall37. N07h1ng was s3n7.", "err");
+      log("user rejected", "err");
+    } else {
+      fail("Salvage failed", e);
+    }
+    updateCta();
+  }
+}
+
+function done(hash, ids) {
+  state.busy = false;
+  el.panelTitle.textContent = "SALVAG3D";
+  say(`${ids.length} p1p${ids.length === 1 ? "" : "s"} c0nsum3d. 7h3 0r1g1nals ar3 a7 ${DEAD.slice(0, 10)}… n0w.`, "ok");
+  log(`SALVAGED ${ids.join(", ")} · ${hash}`, "ok");
+  el.selRow.classList.add("hidden");
+  el.pips.classList.remove("hidden");
+  el.pips.innerHTML = "";
+  for (const id of ids) {
+    const d = document.createElement("div");
+    d.className = "pip"; d.setAttribute("aria-pressed", "true"); d.style.cursor = "default";
+    d.innerHTML = `<img src="${IMG(id)}" alt="corrupted pip ${id}" width="256" height="256" loading="lazy"><span class="id">#${id}</span>`;
+    el.pips.appendChild(d);
+  }
+  const p = document.createElement("p");
+  p.style.cssText = "grid-column:1/-1;margin:6px 0 0;font-size:12px";
+  p.innerHTML = `7X <a href="${explorerTx(hash)}" target="_blank" rel="noopener">${hash.slice(0, 18)}…${hash.slice(-6)}</a> 0n Bl0cksc0u7.`;
+  el.pips.appendChild(p);
+  setCta("SCAN F0R M0R3", loadPips, false);
+}
+
+/* ============================================================
+   9. Boot
+   ============================================================ */
+
+el.cta.addEventListener("click", async () => {
+  const action = state.ctaAction;
+  if (!action || el.cta.disabled) return;
+  el.cta.disabled = true;
+  try { await action(); }
+  catch (e) {
+    if (e && e.code === 4001) { say("R3qu3s7 r3j3c73d 1n wall37.", "err"); log("user rejected", "err"); }
+    else fail("Failed", e);
+  }
+  finally { el.cta.disabled = !state.ctaAction; }
+});
+
+if (eth()) {
+  eth().on && eth().on("accountsChanged", accs => {
+    log("wallet accountsChanged");
+    if (!accs || !accs.length) {
+      state.account = null; state.owned = []; state.selected.clear();
+      el.pips.classList.add("hidden"); el.selRow.classList.add("hidden");
+      el.panelTitle.textContent = "C0NN3C7";
+      say("Wall37 d1sc0nn3c73d.");
+      setCta("C0NN3C7 WALL37", connect, false);
+    } else { state.account = accs[0].toLowerCase(); afterConnect(); }
+  });
+  eth().on && eth().on("chainChanged", () => { log("wallet chainChanged"); afterConnect(); });
+}
+
+setCta("C0NN3C7 WALL37", connect, false);
+configGuard();
+
+// Diagnostics, deliberately not surfaced in the UI. There is no counter on this page.
+window.C0RE = {
+  cfg: CFG,
+  totalSupply: async () => BigInt(await ethCall(CFG.core, "0x" + SEL.totalSupply)).toString(),
+  ownerOf: async id => addrFromWord(strip(await ethCall(CFG.gridPips, encOwnerOf(id)))),
+  // C0RE.scan()  uses the connected wallet.
+  // C0RE.scan("0x…")  works with no wallet connected at all.
+  scan: async addr => {
+    const a = (addr || state.account || "").toLowerCase();
+    if (!/^0x[0-9a-f]{40}$/.test(a)) throw new Error("C0RE.scan needs an address, or a connected wallet");
+    const t = Date.now();
+    const owned = await findOwnedPips(a);
+    console.log(`scanned ${MAX_ID} ids in ${((Date.now() - t) / 1000).toFixed(1)}s · ${owned.length} held by ${a}`);
+    return owned;
+  }
+};
+log(`${CFG.label} · chain ${CFG.chainId} · C0RE ${CFG.core}`);
+})();
+</script>
+</body>
+</html>
