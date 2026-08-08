@@ -233,7 +233,7 @@ footer .k{color:#4a7060;display:inline-block;min-width:92px}
    1. CONFIG - single switch
    ============================================================ */
 
-const NETWORK = "testnet";        // "testnet" | "mainnet"
+const NETWORK = "mainnet";        // "testnet" | "mainnet"
 
 const CONFIG = {
   testnet: {
@@ -253,8 +253,9 @@ const CONFIG = {
     // Verified: returns chainId 0x1237. The bare host works too; /rpc kept for symmetry with testnet.
     rpc:        "https://rpc.mainnet.chain.robinhood.com/rpc",
     gridPips:   "0xa8F4DAec5aC1916C9ea3F7733bb06459cC1C0367",
-    // >>> FILL IN: C0RE is NOT DEPLOYED on mainnet yet. <<<
-    core:       "0xC0RE_NOT_DEPLOYED_YET",
+    // Deployed 2026-08-08. Salvage of pip 492 verified on chain: burn to dEaD,
+    // mint, tokenURI, traits re-derived from the contract's own pure functions.
+    core:       "0x730cc533b280ad179e41154b9ff4dc5e9ff15248",
     explorer:   "https://robinhoodchain.blockscout.com",
     // Shown to a wallet holding no pips.
     pipsLink:   "https://opensea.io/collection/grid-pips",
