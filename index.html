@@ -14,12 +14,12 @@
 <style>
 :root{
   --bg:#05030a;
-  --ink:#3df2a0;
-  --dim:#6b9683;
+  --ink:#1aff5c;
+  --dim:#559b6c;
   --mag:#ff2d95;
   --mag-soft:#ff5fb8;
   --err:#ff4444;
-  --ok:#c8ffe4;
+  --ok:#ccffcf;
   --line:rgba(255,45,149,.22);
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
 }
@@ -91,8 +91,8 @@ body{
 /* binary rain, kept to the outer edges so the middle column stays readable */
 .bg .rain{
   position:absolute;inset:-240px 0 0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='240'%3E%3Ctext x='74' y='16' font-family='monospace' font-size='13' fill='%2335f39a'%3E1%3C/text%3E%3Ctext x='96' y='16' font-family='monospace' font-size='13' fill='%2335f39a'%3E1%3C/text%3E%3Ctext x='96' y='38' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='74' y='60' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='96' y='60' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='52' y='80' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='8' y='102' font-family='monospace' font-size='13' fill='%2335f39a'%3E1%3C/text%3E%3Ctext x='30' y='102' font-family='monospace' font-size='13' fill='%2335f39a'%3E1%3C/text%3E%3Ctext x='96' y='124' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='0' y='124' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='8' y='146' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='30' y='164' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='52' y='164' font-family='monospace' font-size='13' fill='%2335f39a'%3E1%3C/text%3E%3Ctext x='74' y='184' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='96' y='184' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='52' y='206' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='8' y='228' font-family='monospace' font-size='13' fill='%2335f39a'%3E1%3C/text%3E%3C/svg%3E");
-  background-size:120px 240px; opacity:.16;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='240'%3E%3Ctext x='74' y='16' font-family='monospace' font-size='14' fill='%231aff5c'%3E1%3C/text%3E%3Ctext x='96' y='16' font-family='monospace' font-size='14' fill='%231aff5c'%3E1%3C/text%3E%3Ctext x='96' y='38' font-family='monospace' font-size='14' fill='%231aff5c'%3E0%3C/text%3E%3Ctext x='74' y='60' font-family='monospace' font-size='14' fill='%231aff5c'%3E0%3C/text%3E%3Ctext x='96' y='60' font-family='monospace' font-size='14' fill='%231aff5c'%3E0%3C/text%3E%3Ctext x='52' y='80' font-family='monospace' font-size='14' fill='%231aff5c'%3E0%3C/text%3E%3Ctext x='8' y='102' font-family='monospace' font-size='14' fill='%231aff5c'%3E1%3C/text%3E%3Ctext x='30' y='102' font-family='monospace' font-size='14' fill='%231aff5c'%3E1%3C/text%3E%3Ctext x='96' y='124' font-family='monospace' font-size='14' fill='%231aff5c'%3E0%3C/text%3E%3Ctext x='0' y='124' font-family='monospace' font-size='14' fill='%231aff5c'%3E0%3C/text%3E%3Ctext x='8' y='146' font-family='monospace' font-size='14' fill='%231aff5c'%3E0%3C/text%3E%3Ctext x='30' y='164' font-family='monospace' font-size='14' fill='%231aff5c'%3E0%3C/text%3E%3Ctext x='52' y='164' font-family='monospace' font-size='14' fill='%231aff5c'%3E1%3C/text%3E%3Ctext x='74' y='184' font-family='monospace' font-size='14' fill='%231aff5c'%3E0%3C/text%3E%3Ctext x='96' y='184' font-family='monospace' font-size='14' fill='%231aff5c'%3E0%3C/text%3E%3Ctext x='52' y='206' font-family='monospace' font-size='14' fill='%231aff5c'%3E0%3C/text%3E%3Ctext x='8' y='228' font-family='monospace' font-size='14' fill='%231aff5c'%3E1%3C/text%3E%3C/svg%3E");
+  background-size:120px 240px; opacity:.48;
   animation:rainfall 14s linear infinite;
   -webkit-mask-image:linear-gradient(90deg,#000 0%,transparent 26%,transparent 74%,#000 100%);
   mask-image:linear-gradient(90deg,#000 0%,transparent 26%,transparent 74%,#000 100%);
@@ -102,8 +102,15 @@ body{
 .bg .bar{position:absolute;left:0;right:0;height:3px;opacity:.55;
   background:linear-gradient(90deg,#c0c0c0 0 14.28%,#c0c000 14.28% 28.56%,#00c0c0 28.56% 42.84%,
     #00c000 42.84% 57.12%,#c000c0 57.12% 71.4%,#c00000 71.4% 85.68%,#0000c0 85.68% 100%);}
-.bg .bar1{animation:sweep1 23s linear infinite}
-.bg .bar2{height:2px;opacity:.4;animation:sweep2 37s linear infinite}
+.bg .bar1{animation:sweepA 6.5s linear infinite}
+.bg .bar2{height:2px;opacity:.42;animation:sweepB 9s linear infinite}
+.bg .bar3{height:5px;opacity:.5;animation:sweepC 13s linear infinite}
+.bg .bar4{height:2px;opacity:.35;animation:sweepD 19s linear infinite}
+/* dropout bands: the picture simply stops for a moment */
+.bg .band{position:absolute;left:0;right:0;background:rgba(4,2,8,.92)}
+.bg .band1{height:16px;animation:sweepB 8s linear infinite}
+.bg .band2{height:9px;animation:sweepA 12.5s linear infinite}
+.bg .band3{height:26px;opacity:.8;animation:sweepD 21s linear infinite}
 
 @keyframes drift1{to{transform:translateX(-280px)}}
 @keyframes drift2{to{transform:translateX(-360px)}}
@@ -116,11 +123,15 @@ body{
 @keyframes tw2{0%,100%{opacity:1}50%{opacity:.5}}
 @keyframes tw3{0%,100%{opacity:.7}45%{opacity:.35}}
 @keyframes rainfall{to{transform:translateY(240px)}}
-@keyframes sweep1{0%,64%{top:-2%}84%{top:102%}100%{top:102%}}
-@keyframes sweep2{0%,41%{top:102%}62%{top:-2%}100%{top:-2%}}
+/* short fast tear, long wait, so they read as glitches rather than a scanner */
+/* appear just as often, but cross the page slowly instead of snapping */
+@keyframes sweepA{0%,26%{top:-4%}100%{top:104%}}
+@keyframes sweepB{0%,20%{top:104%}100%{top:-4%}}
+@keyframes sweepC{0%,32%{top:-4%}100%{top:104%}}
+@keyframes sweepD{0%,24%{top:104%}100%{top:-4%}}
 @media (prefers-reduced-motion:reduce){
-  .bg .aurora i,.bg .rain,.bg .bar{animation:none}
-  .bg .bar{display:none}
+  .bg .aurora i,.bg .rain,.bg .bar,.bg .band{animation:none}
+  .bg .bar,.bg .band{display:none}
 }
 .bg .sky{
   position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);
@@ -253,7 +264,7 @@ button.ghost:hover:not(:disabled){background:transparent;color:var(--ink);border
 a{color:var(--mag-soft)}
 a:focus-visible{outline:2px solid var(--mag-soft);outline-offset:2px}
 footer{margin-top:40px;border-top:1px solid var(--line);padding-top:16px;color:var(--dim);font-size:11px;line-height:1.9}
-footer .k{color:#4a7060;display:inline-block;min-width:92px}
+footer .k{color:#427052;display:inline-block;min-width:92px}
 .hidden{display:none !important}
 
 /* status */
@@ -308,6 +319,11 @@ footer .k{color:#4a7060;display:inline-block;min-width:92px}
   <div class="horizon"></div>
   <div class="bar bar1"></div>
   <div class="bar bar2"></div>
+  <div class="bar bar3"></div>
+  <div class="bar bar4"></div>
+  <div class="band band1"></div>
+  <div class="band band2"></div>
+  <div class="band band3"></div>
 </div>
 
 <main class="wrap">
