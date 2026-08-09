@@ -254,13 +254,6 @@ button.ghost:hover:not(:disabled){background:transparent;color:var(--ink);border
 .status.ok{color:var(--ok)}
 .bar{height:2px;background:rgba(255,45,149,.15);margin:10px 0 16px;overflow:hidden}
 .bar i{display:block;height:100%;width:0;background:var(--mag);transition:width .18s linear}
-.log{
-  border:1px solid var(--line);background:rgba(0,0,0,.35);padding:10px;
-  font-size:11px;line-height:1.55;color:var(--dim);
-  max-height:190px;overflow-y:auto;white-space:pre-wrap;word-break:break-word
-}
-.log b{color:var(--err);font-weight:400}
-.log u{color:var(--ok);text-decoration:none}
 a{color:var(--mag-soft)}
 a:focus-visible{outline:2px solid var(--mag-soft);outline-offset:2px}
 footer{margin-top:40px;border-top:1px solid var(--line);padding-top:16px;color:var(--dim);font-size:11px;line-height:1.9}
@@ -392,11 +385,6 @@ footer .k{color:#427052;display:inline-block;min-width:92px}
     <h2>7RA17S &middot; ALL 825 P0SS1BL3</h2>
     <p class="empty" style="margin-bottom:12px">Counts are of every pip that could be salvaged, not of what exists.</p>
     <div class="tcols" id="tcols"></div>
-  </section>
-
-  <section>
-    <h2>L0G</h2>
-    <div class="log" id="log" aria-live="polite">awa171ng 1npu7</div>
   </section>
 
   <footer>
@@ -576,20 +564,14 @@ function decodeRevert(data) {
 
 const $ = id => document.getElementById(id);
 const el = {
-  status: $("status"), cta: $("cta"), pips: $("pips"), log: $("log"),
+  status: $("status"), cta: $("cta"), pips: $("pips"),
   bar: $("bar"), barFill: $("barFill"), selRow: $("selRow"),
   panelTitle: $("panelTitle"), netline: $("netline")
 };
 
+// The on-page log panel is gone. Everything still goes to the console, and any
+// failure a visitor needs to see is already surfaced in the status line.
 function log(msg, kind) {
-  const t = new Date().toISOString().slice(11, 19);
-  const line = document.createElement("div");
-  const tag = kind === "err" ? "b" : kind === "ok" ? "u" : "span";
-  line.innerHTML = `${t}  <${tag}></${tag}>`;
-  line.querySelector(tag).textContent = msg;
-  if (el.log.textContent === "awa171ng 1npu7") el.log.textContent = "";
-  el.log.appendChild(line);
-  el.log.scrollTop = el.log.scrollHeight;
   (kind === "err" ? console.error : console.log)("[c0re]", msg);
 }
 function say(msg, kind) {
