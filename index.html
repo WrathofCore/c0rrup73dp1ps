@@ -59,6 +59,13 @@ body{
 
 /* ---------- layout ---------- */
 .wrap{position:relative;z-index:1;max-width:660px;margin:0 auto;padding:44px 18px 96px}
+.topnav{display:flex;justify-content:flex-end;gap:14px;margin:0 0 18px;flex-wrap:wrap}
+.topnav a{
+  color:var(--dim);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  text-decoration:none;border:1px solid var(--line);padding:6px 10px;
+  transition:color .15s,border-color .15s;
+}
+.topnav a:hover{color:var(--mag);border-color:var(--mag)}
 header{margin-bottom:30px}
 h1{
   margin:0;font-size:clamp(22px,6.4vw,34px);font-weight:700;
@@ -70,10 +77,10 @@ h1{
 /* hero: deliberately small. the source art is low resolution, so do not upscale it. */
 .hero{
   margin:0 auto 26px;position:relative;
-  width:100%;max-width:264px;
+  width:100%;max-width:240px;
   border:1px solid var(--line);background:#0a0512;
 }
-.hero img{
+.hero img,.hero video{
   display:block;width:100%;height:auto;
   image-rendering:pixelated;image-rendering:crisp-edges;
 }
@@ -155,9 +162,42 @@ a:focus-visible{outline:2px solid var(--mag-soft);outline-offset:2px}
 footer{margin-top:40px;border-top:1px solid var(--line);padding-top:16px;color:var(--dim);font-size:11px;line-height:1.9}
 footer .k{color:#4a7060;display:inline-block;min-width:92px}
 .hidden{display:none !important}
+
+/* status */
+.stat{margin:0 0 4px;font-size:clamp(20px,5.4vw,30px);letter-spacing:.06em;color:var(--mag);
+  text-shadow:0 0 16px rgba(255,45,149,.45)}
+.stat b{font-weight:700}
+.stat .rest{color:var(--dim);font-size:13px;letter-spacing:.1em;display:block;margin-top:4px}
+.gauge{height:8px;background:rgba(255,45,149,.10);border:1px solid var(--line);margin:12px 0 0;
+  position:relative;overflow:hidden}
+.gauge i{display:block;height:100%;width:0;background:var(--mag);
+  box-shadow:0 0 12px rgba(255,45,149,.7);transition:width .9s ease-out}
+.gauge::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(90deg,transparent 0 3px,rgba(5,3,10,.85) 3px 4px)}
+
+/* trait table */
+.tcols{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.tcol{border:1px solid var(--line);padding:9px 10px}
+.tcol h3{margin:0 0 7px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mag-soft);font-weight:600;display:flex;justify-content:space-between}
+.tcol h3 span{color:var(--dim)}
+.trow{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;line-height:1.75;color:var(--ink)}
+.trow em{font-style:normal;color:var(--dim);white-space:nowrap}
+.trow.rare{color:var(--mag)}
+.trow.rare em{color:var(--mag)}
+
+/* recovered wall */
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px;margin-top:12px}
+.wcell{border:1px solid var(--line);background:#0a0512;position:relative;display:block}
+.wcell img{display:block;width:100%;height:auto;image-rendering:pixelated;image-rendering:crisp-edges}
+.wcell span{display:block;padding:3px 5px;font-size:10px;color:var(--dim);border-top:1px solid var(--line)}
+.wcell:hover span{color:var(--mag)}
+.empty{color:var(--dim);font-size:13px;margin:0}
 @media (max-width:420px){
   .wrap{padding:30px 14px 70px}
-  .hero{max-width:212px}
+  .tcols{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .wall{grid-template-columns:repeat(auto-fill,minmax(68px,1fr))}
+  .hero{max-width:200px}
   .pips{grid-template-columns:repeat(auto-fill,minmax(82px,1fr))}
 }
 </style>
@@ -171,15 +211,22 @@ footer .k{color:#4a7060;display:inline-block;min-width:92px}
 </div>
 
 <main class="wrap">
+  <nav class="topnav">
+    <a id="navCore" href="#" target="_blank" rel="noopener">C0RRUP73D 0N 0P3NS3A</a>
+    <a id="navPips" href="#" target="_blank" rel="noopener">GR1D P1PS 0N 0P3NS3A</a>
+  </nav>
+
   <header>
     <h1>C0RRUP73D.P1PS</h1>
     <p class="sub" id="netline">825 r3c0v3r3d ar71fac7s</p>
   </header>
 
   <figure class="hero">
-    <img id="hero" src="https://img.syst3mc0r3.art/10.png" alt="Corrupted grid pip, token 10" width="512" height="512">
-    <div class="imgfail" id="heroFail">H3R0 1MAG3 FA1L3D. Could not load img.syst3mc0r3.art/10.png. The site works; the picture does not.</div>
-    <figcaption>#10 &middot; R3C0V3R3D</figcaption>
+    <video id="hero" src="hero_291.mp4" poster="hero_291_poster.png"
+           width="480" height="480" autoplay loop muted playsinline
+           aria-label="Corrupted grid pip 291, animated"></video>
+    <div class="imgfail" id="heroFail">H3R0 CL1P FA1L3D. Could not load hero_291.mp4. The site works; the picture does not.</div>
+    <figcaption>#291 &middot; R3C0V3R3D</figcaption>
   </figure>
 
   <p class="premise">
@@ -187,6 +234,13 @@ footer .k{color:#4a7060;display:inline-block;min-width:92px}
     <em>C0nsum3 a gr1d p1p 70 s33 wha7 was und3rn3a7h.</em>
     I7 d03s n07 c0m3 back cl3an.
   </p>
+
+  <section>
+    <h2>S7A7US</h2>
+    <p class="stat" id="statLine"><b>&mdash;</b> R3C0V3R3D
+      <span class="rest" id="statRest">r3ad1ng 7h3 cha1n&hellip;</span></p>
+    <div class="gauge"><i id="gaugeFill"></i></div>
+  </section>
 
   <section>
     <h2>7W0 7RANSAC710NS</h2>
@@ -212,6 +266,18 @@ footer .k{color:#4a7060;display:inline-block;min-width:92px}
     <button id="cta" type="button">C0NN3C7 WALL37</button>
   </section>
 
+  <section id="wallSec" class="hidden">
+    <h2>R3C0V3R3D</h2>
+    <p class="empty" id="wallNote">&nbsp;</p>
+    <div class="wall" id="wall"></div>
+  </section>
+
+  <section id="traitSec" class="hidden">
+    <h2>7RA17S &middot; ALL 825 P0SS1BL3</h2>
+    <p class="empty" style="margin-bottom:12px">Counts are of every pip that could be salvaged, not of what exists.</p>
+    <div class="tcols" id="tcols"></div>
+  </section>
+
   <section>
     <h2>L0G</h2>
     <div class="log" id="log" aria-live="polite">awa171ng 1npu7</div>
@@ -221,6 +287,8 @@ footer .k{color:#4a7060;display:inline-block;min-width:92px}
     <div><span class="k">n37w0rk</span><span id="fNet">&mdash;</span></div>
     <div><span class="k">gr1d p1ps</span><a id="fPips" href="#" target="_blank" rel="noopener">&mdash;</a></div>
     <div><span class="k">c0n7rac7</span><a id="fCore" href="#" target="_blank" rel="noopener">&mdash;</a></div>
+    <div><span class="k">0p3ns3a</span><a id="fOsCore" href="#" target="_blank" rel="noopener">&mdash;</a></div>
+    <div><span class="k">gr1d p1ps</span><a id="fOsPips" href="#" target="_blank" rel="noopener">0p3ns3a</a></div>
     <div style="margin-top:10px">c0rrup73dp1ps.online</div>
   </footer>
 </main>
@@ -264,8 +332,21 @@ const CONFIG = {
 };
 
 const MAX_ID   = 825;
+
+const OPENSEA_CORE = "https://opensea.io/collection/c0rrup73d-p1ps";
+const OPENSEA_PIPS = "https://opensea.io/collection/grid-pips";
+
+// Trait counts across all 825 possible salvages. Paste the verified numbers from
+// the contract's own pure functions. Category -> [[label, count], ...].
+// Anything under RARE_AT of 825 is highlighted. Empty object hides the section,
+// which is better than publishing numbers nobody checked.
+const RARE_AT = 0.05;
+const TRAITS = {
+  // "Tier": [["Clean", 0], ["Degraded", 0], ["Broken", 0], ["Scrambled", 0]],
+};
 const DEAD     = "0x000000000000000000000000000000000000dEaD";
-const HERO_ID  = 10;
+const HERO_ID  = 291;             // a genuinely recovered id, so the caption is true
+const HERO_CLIP = "hero_291.mp4"; // sits next to index.html in the repo
 const IMG      = id => `https://img.syst3mc0r3.art/${id}.png`;
 
 // Canonical CREATE2 deployment. Confirmed live on Robinhood testnet. Still probed at runtime, never assumed.
@@ -414,7 +495,9 @@ function progressOff() { el.bar.classList.add("hidden"); el.barFill.style.width 
 $("hero").addEventListener("error", () => {
   $("hero").style.display = "none";
   $("heroFail").style.display = "block";
-  log("hero image " + IMG(HERO_ID) + " failed to load", "err");
+  const cap = document.querySelector(".hero figcaption");
+  if (cap) cap.style.display = "none";
+  log("hero clip " + HERO_CLIP + " failed to load. Is it uploaded next to index.html?", "err");
 });
 
 // Footer
@@ -424,6 +507,12 @@ $("fPips").textContent = CFG.gridPips;
 $("fPips").href = `${CFG.explorer}/address/${CFG.gridPips}`;
 $("fCore").textContent = CFG.core;
 $("fCore").href = `${CFG.explorer}/address/${CFG.core}`;
+if (OPENSEA_CORE) { $("fOsCore").textContent = "0p3nS3a"; $("fOsCore").href = OPENSEA_CORE; }
+else { $("fOsCore").closest("div").style.display = "none"; }
+$("fOsPips").href = OPENSEA_PIPS;
+$("navPips").href = OPENSEA_PIPS;
+if (OPENSEA_CORE) $("navCore").href = OPENSEA_CORE;
+else $("navCore").style.display = "none";
 
 /* ============================================================
    4. RPC
@@ -493,62 +582,147 @@ async function probeMulticall() {
 
 const chunk = (arr, n) => { const o = []; for (let i = 0; i < arr.length; i += n) o.push(arr.slice(i, i + n)); return o; };
 
-async function scanViaMulticall(ids, account, onProgress) {
-  const owned = [];
+// Returns a Map of id -> owner for every id that exists on `target`.
+// Ids that were never minted revert and are simply absent from the map.
+async function scanViaMulticall(target, ids, onProgress) {
+  const owners = new Map();
   let done = 0;
   for (const group of chunk(ids, CHUNK_MULTICALL)) {
     const data = encAggregate3(group.map(id => ({
-      target: CFG.gridPips, allowFailure: true, data: encOwnerOf(id)
+      target, allowFailure: true, data: encOwnerOf(id)
     })));
     const ret = await ethCall(MULTICALL3, data);
     const results = decAggregate3(ret);
     if (results.length !== group.length) throw new Error(`aggregate3 returned ${results.length} results for ${group.length} calls`);
     results.forEach((r, i) => {
       if (!r.success || r.data.length < 66) return;    // never minted, or already burnt
-      if (addrFromWord(strip(r.data)).toLowerCase() === account) owned.push(group[i]);
+      owners.set(group[i], addrFromWord(strip(r.data)).toLowerCase());
     });
     done += group.length;
-    onProgress(done);
+    if (onProgress) onProgress(done);
   }
-  return owned;
+  return owners;
 }
 
-async function scanViaBatch(ids, account, onProgress) {
-  const owned = [];
+async function scanViaBatch(target, ids, onProgress) {
+  const owners = new Map();
   let done = 0;
   for (const group of chunk(ids, CHUNK_BATCH)) {
     const res = await rpcBatch(group.map(id => ({
       method: "eth_call",
-      params: [{ to: CFG.gridPips, data: encOwnerOf(id) }, "latest"]
+      params: [{ to: target, data: encOwnerOf(id) }, "latest"]
     })));
     res.forEach((r, i) => {
       if (r.error) return;                              // unminted ids revert; expected
       if (!r.result || r.result.length < 66) return;
-      if (addrFromWord(strip(r.result)).toLowerCase() === account) owned.push(group[i]);
+      owners.set(group[i], addrFromWord(strip(r.result)).toLowerCase());
     });
     done += group.length;
-    onProgress(done);
+    if (onProgress) onProgress(done);
   }
-  return owned;
+  return owners;
 }
 
-async function findOwnedPips(account) {
+async function scanOwners(target, onProgress) {
   const ids = Array.from({ length: MAX_ID }, (_, i) => i + 1);
-  const onProgress = d => {
-    progress(d, MAX_ID);
-    say(`SCANN1NG… ${d} / ${MAX_ID} 1ds ch3ck3d.`);
-  };
   const useMc = await probeMulticall();
   if (useMc) {
     try {
-      return await scanViaMulticall(ids, account, onProgress);
+      return await scanViaMulticall(target, ids, onProgress);
     } catch (e) {
       log("Multicall3 path failed: " + e.message + " - retrying with batched eth_call.", "err");
-      say("Multicall3 failed. R37ry1ng w17h ba7ch3d calls…");
       multicallReady = false;
     }
   }
-  return await scanViaBatch(ids, account, onProgress);
+  return await scanViaBatch(target, ids, onProgress);
+}
+
+async function findOwnedPips(account) {
+  const owners = await scanOwners(CFG.gridPips, d => {
+    progress(d, MAX_ID);
+    say(`SCANN1NG… ${d} / ${MAX_ID} 1ds ch3ck3d.`);
+  });
+  return [...owners].filter(([, o]) => o === account).map(([id]) => id);
+}
+
+/* ============================================================
+   5b. Page state: recovered count, the wall, the trait table.
+   All of this runs with no wallet connected.
+   ============================================================ */
+
+const short = a => a.slice(0, 6) + "…" + a.slice(-4);
+
+async function loadStats() {
+  const rest = $("statRest"), line = $("statLine");
+  try {
+    const owners = await scanOwners(CFG.core);
+    const n = owners.size;
+    line.innerHTML = `<b>${n}</b> 0F ${MAX_ID} R3C0V3R3D`;
+    rest.textContent = `${MAX_ID - n} s71ll unr3ad. n0n3 3x1s7 un71l s0m30n3 mak3s 0n3.`;
+    requestAnimationFrame(() => { $("gaugeFill").style.width = (n / MAX_ID * 100) + "%"; });
+    log(`C0RE holds ${n} recovered artifact(s)`, "ok");
+    renderWall(owners);
+  } catch (e) {
+    line.innerHTML = `<b>&mdash;</b> R3C0V3R3D`;
+    rest.textContent = "Could not read the chain for the recovered count.";
+    rest.style.color = "var(--err)";
+    log("stats read failed: " + e.message, "err");
+  }
+}
+
+function renderWall(owners) {
+  const sec = $("wallSec"), wall = $("wall"), note = $("wallNote");
+  if (!owners.size) {
+    sec.classList.remove("hidden");
+    note.textContent = "N0n3 y37. 7h3 f1rs7 0n3 1s s71ll 7h3r3.";
+    return;
+  }
+  const ids = [...owners.keys()].sort((a, b) => a - b);
+  note.textContent = `${ids.length} pulled 0u7 s0 far.`;
+  wall.innerHTML = "";
+  for (const id of ids) {
+    const a = document.createElement("a");
+    a.className = "wcell";
+    a.href = `${CFG.explorer}/token/${CFG.core}/instance/${id}`;
+    a.target = "_blank"; a.rel = "noopener";
+    a.title = "#" + id + " · " + owners.get(id);
+    const img = document.createElement("img");
+    img.src = IMG(id); img.alt = "corrupted pip " + id;
+    img.loading = "lazy"; img.width = 256; img.height = 256;
+    img.addEventListener("error", () => log("wall image missing: " + IMG(id), "err"));
+    const s = document.createElement("span");
+    s.textContent = "#" + id;
+    a.append(img, s);
+    wall.appendChild(a);
+  }
+  sec.classList.remove("hidden");
+}
+
+function renderTraits() {
+  const cats = Object.keys(TRAITS);
+  if (!cats.length) return;   // nothing verified yet, so show nothing
+  const box = $("tcols");
+  box.innerHTML = "";
+  for (const cat of cats) {
+    const rows = TRAITS[cat];
+    const col = document.createElement("div");
+    col.className = "tcol";
+    const h = document.createElement("h3");
+    h.innerHTML = `${cat}<span>${rows.length}</span>`;
+    col.appendChild(h);
+    for (const [label, count] of rows) {
+      const pct = count / MAX_ID;
+      const r = document.createElement("div");
+      r.className = "trow" + (pct < RARE_AT ? " rare" : "");
+      const l = document.createElement("span"); l.textContent = label;
+      const v = document.createElement("em");
+      v.textContent = `${count} · ${(pct * 100).toFixed(2)}%`;
+      r.append(l, v);
+      col.appendChild(r);
+    }
+    box.appendChild(col);
+  }
+  $("traitSec").classList.remove("hidden");
 }
 
 /* ============================================================
@@ -911,6 +1085,11 @@ window.C0RE = {
   }
 };
 log(`${CFG.label} · chain ${CFG.chainId} · C0RE ${CFG.core}`);
+
+// Read the chain straight away. No wallet needed, so a visitor who never
+// connects still sees a live page instead of a static one.
+renderTraits();
+if (/^0x[0-9a-fA-F]{40}$/.test(CFG.core) && CFG.rpc.indexOf("PASTE_") !== 0) loadStats();
 })();
 </script>
 </body>
