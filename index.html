@@ -33,15 +33,94 @@ body{
 }
 /* ---------- background: horizon + receding grid ---------- */
 .bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-/* real sky lifted from the pips themselves: aurora and stars above the horizon.
-   Strongest just above the horizon line, absent at the very top so the title
-   keeps its contrast. */
+/* The whole background is one corrupted pip scene: aurora sky, starfield,
+   binary rain, colour-bar tears and the grid floor. All CSS, so it stays sharp
+   at any size and costs no extra files. */
 .bg .aurora{
-  position:absolute;left:0;right:0;top:0;height:38%;
-  background:url("sky.png") repeat-x center bottom / auto 100%;
-  opacity:.5;
-  -webkit-mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.45) 34%,#000 78%,rgba(0,0,0,.9) 100%);
-  mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.45) 34%,#000 78%,rgba(0,0,0,.9) 100%);
+  position:absolute;left:0;right:0;top:0;height:38%;overflow:hidden;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.55) 22%,#000 55%,#000 93%,transparent 100%);
+  mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.55) 22%,#000 55%,#000 93%,transparent 100%);
+}
+.bg .aurora i{position:absolute;top:-14%;bottom:-14%;left:-70%;right:-70%;display:block}
+
+.bg .aurora .c1{background:repeating-linear-gradient(97deg,
+    rgba(64,226,205,0) 0px, rgba(64,226,205,.30) 60px, rgba(64,226,205,0) 150px, rgba(64,226,205,0) 280px);
+  filter:blur(7px); animation:drift1 26s linear infinite;}
+.bg .aurora .c2{background:repeating-linear-gradient(83deg,
+    rgba(158,110,255,.0) 0px, rgba(158,110,255,.26) 48px, rgba(158,110,255,0) 130px, rgba(158,110,255,0) 360px);
+  filter:blur(11px); animation:drift2 41s linear infinite reverse;}
+.bg .aurora .c3{background:repeating-linear-gradient(93deg,
+    rgba(255,45,149,0) 0px, rgba(255,45,149,.18) 36px, rgba(255,45,149,0) 110px, rgba(255,45,149,0) 470px);
+  filter:blur(14px); animation:drift3 63s linear infinite;}
+.bg .aurora .c4{background:repeating-linear-gradient(88deg,
+    rgba(120,255,220,0) 0px, rgba(120,255,220,.16) 24px, rgba(120,255,220,0) 70px, rgba(120,255,220,0) 190px);
+  filter:blur(4px); animation:drift4 17s linear infinite reverse;}
+
+/* three star layers at different densities and speeds so it reads as depth */
+.bg .aurora .s1,.bg .aurora .s2,.bg .aurora .s3{background-repeat:repeat}
+.bg .aurora .s1{
+  background-image:
+    radial-gradient(1.5px 1.5px at 18px 24px,rgba(255,255,255,.95),transparent),
+    radial-gradient(1.2px 1.2px at 74px 12px,rgba(210,255,246,.8),transparent),
+    radial-gradient(1px 1px at 122px 58px,rgba(255,255,255,.7),transparent),
+    radial-gradient(1.6px 1.6px at 44px 78px,rgba(255,255,255,.9),transparent),
+    radial-gradient(1px 1px at 150px 96px,rgba(230,215,255,.75),transparent),
+    radial-gradient(1.3px 1.3px at 96px 112px,rgba(255,255,255,.85),transparent),
+    radial-gradient(1px 1px at 6px 104px,rgba(200,255,240,.6),transparent),
+    radial-gradient(1.4px 1.4px at 134px 30px,rgba(255,255,255,.8),transparent);
+  background-size:170px 130px; animation:drift5 90s linear infinite, tw1 3.4s ease-in-out infinite;}
+.bg .aurora .s2{
+  background-image:
+    radial-gradient(1px 1px at 28px 40px,rgba(255,255,255,.7),transparent),
+    radial-gradient(1.2px 1.2px at 108px 20px,rgba(190,255,245,.65),transparent),
+    radial-gradient(1px 1px at 62px 86px,rgba(255,255,255,.6),transparent),
+    radial-gradient(1.4px 1.4px at 176px 66px,rgba(255,255,255,.75),transparent),
+    radial-gradient(1px 1px at 142px 118px,rgba(235,220,255,.6),transparent),
+    radial-gradient(1.1px 1.1px at 12px 132px,rgba(255,255,255,.65),transparent);
+  background-size:210px 160px; animation:drift6 140s linear infinite reverse, tw2 5.1s ease-in-out infinite;}
+.bg .aurora .s3{
+  background-image:
+    radial-gradient(.9px .9px at 50px 30px,rgba(255,255,255,.5),transparent),
+    radial-gradient(.9px .9px at 130px 74px,rgba(255,255,255,.45),transparent),
+    radial-gradient(1px 1px at 86px 140px,rgba(220,255,250,.5),transparent),
+    radial-gradient(.9px .9px at 196px 108px,rgba(255,255,255,.4),transparent);
+  background-size:250px 190px; animation:drift7 220s linear infinite, tw3 7.3s ease-in-out infinite;}
+
+.bg .aurora .scan{background:repeating-linear-gradient(0deg,rgba(5,3,10,.32) 0 1px,transparent 1px 3px)}
+
+/* binary rain, kept to the outer edges so the middle column stays readable */
+.bg .rain{
+  position:absolute;inset:-240px 0 0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='240'%3E%3Ctext x='74' y='16' font-family='monospace' font-size='13' fill='%2335f39a'%3E1%3C/text%3E%3Ctext x='96' y='16' font-family='monospace' font-size='13' fill='%2335f39a'%3E1%3C/text%3E%3Ctext x='96' y='38' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='74' y='60' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='96' y='60' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='52' y='80' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='8' y='102' font-family='monospace' font-size='13' fill='%2335f39a'%3E1%3C/text%3E%3Ctext x='30' y='102' font-family='monospace' font-size='13' fill='%2335f39a'%3E1%3C/text%3E%3Ctext x='96' y='124' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='0' y='124' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='8' y='146' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='30' y='164' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='52' y='164' font-family='monospace' font-size='13' fill='%2335f39a'%3E1%3C/text%3E%3Ctext x='74' y='184' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='96' y='184' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='52' y='206' font-family='monospace' font-size='13' fill='%2335f39a'%3E0%3C/text%3E%3Ctext x='8' y='228' font-family='monospace' font-size='13' fill='%2335f39a'%3E1%3C/text%3E%3C/svg%3E");
+  background-size:120px 240px; opacity:.16;
+  animation:rainfall 14s linear infinite;
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,transparent 26%,transparent 74%,#000 100%);
+  mask-image:linear-gradient(90deg,#000 0%,transparent 26%,transparent 74%,#000 100%);
+}
+
+/* colour-bar tears sweeping the whole scene, the same bars that cut the tokens */
+.bg .bar{position:absolute;left:0;right:0;height:3px;opacity:.55;
+  background:linear-gradient(90deg,#c0c0c0 0 14.28%,#c0c000 14.28% 28.56%,#00c0c0 28.56% 42.84%,
+    #00c000 42.84% 57.12%,#c000c0 57.12% 71.4%,#c00000 71.4% 85.68%,#0000c0 85.68% 100%);}
+.bg .bar1{animation:sweep1 23s linear infinite}
+.bg .bar2{height:2px;opacity:.4;animation:sweep2 37s linear infinite}
+
+@keyframes drift1{to{transform:translateX(-280px)}}
+@keyframes drift2{to{transform:translateX(-360px)}}
+@keyframes drift3{to{transform:translateX(-470px)}}
+@keyframes drift4{to{transform:translateX(-190px)}}
+@keyframes drift5{to{transform:translateX(-170px)}}
+@keyframes drift6{to{transform:translateX(-210px)}}
+@keyframes drift7{to{transform:translateX(-250px)}}
+@keyframes tw1{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes tw2{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes tw3{0%,100%{opacity:.7}45%{opacity:.35}}
+@keyframes rainfall{to{transform:translateY(240px)}}
+@keyframes sweep1{0%,64%{top:-2%}84%{top:102%}100%{top:102%}}
+@keyframes sweep2{0%,41%{top:102%}62%{top:-2%}100%{top:-2%}}
+@media (prefers-reduced-motion:reduce){
+  .bg .aurora i,.bg .rain,.bg .bar{animation:none}
+  .bg .bar{display:none}
 }
 .bg .sky{
   position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);
@@ -219,10 +298,16 @@ footer .k{color:#4a7060;display:inline-block;min-width:92px}
 <body>
 
 <div class="bg" aria-hidden="true">
-  <div class="aurora"></div>
+  <div class="aurora">
+    <i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i>
+    <i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="scan"></i>
+  </div>
+  <div class="rain"></div>
   <div class="sky"></div>
   <div class="floor"></div>
   <div class="horizon"></div>
+  <div class="bar bar1"></div>
+  <div class="bar bar2"></div>
 </div>
 
 <main class="wrap">
